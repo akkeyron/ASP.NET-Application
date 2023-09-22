@@ -15,10 +15,15 @@ namespace BulkyWeb.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(); // return view inside the Views folders, if no name inside the backet, it will use the same name as the action name
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult Category()
         {
             return View();
         }
