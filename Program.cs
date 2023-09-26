@@ -1,4 +1,6 @@
-using BulkyWeb.Data;
+using Bulky.DataAccess.Data;
+using Bulky.DataAccess.Repository.IRepository;
+using Bulky.DataAccess.Repository.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,7 @@ builder.Services.AddControllersWithViews(); // when use MVC architecture
 // use sql server
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // inject dependency
 
@@ -31,7 +34,7 @@ app.UseAuthorization(); // authentication and authorization
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}"); // default routing location, id? can be defined or null
+    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"); // default routing location, id? can be defined or null
 
 // controller
 // action
